@@ -196,7 +196,13 @@ resource "aws_db_subnet_group" "roboshop" {
   name       = "roboshop"
   subnet_ids = aws_subnet.database[*].id
 
-  tags = {
-    Name = "My DB subnet group"
-  }
+  tags = merge(
+var.common_tags,
+{
+
+  Name = var.project_name
+},
+
+
+  )
 }
